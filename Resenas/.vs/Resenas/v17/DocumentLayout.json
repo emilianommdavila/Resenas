@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\middleware\\auth\\verificartoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\middleware\\auth\\verificartoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\controllers\\resenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\controllers\\resenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\model\\resenarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\model\\resenarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\model\\resena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\model\\resena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\model\\testmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\model\\testmongodb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 347,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ResenaController.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Controllers\\ResenaController.cs",
+              "RelativeDocumentMoniker": "Resenas\\Controllers\\ResenaController.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Controllers\\ResenaController.cs",
+              "RelativeToolTip": "Resenas\\Controllers\\ResenaController.cs",
+              "ViewState": "AQIAADABAAAAAAAAAAAqwEMBAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T19:35:45.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TestMongoDB.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\TestMongoDB.cs",
+              "RelativeDocumentMoniker": "Resenas\\Model\\TestMongoDB.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\TestMongoDB.cs",
+              "RelativeToolTip": "Resenas\\Model\\TestMongoDB.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T19:35:29.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Resena.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\Resena.cs",
+              "RelativeDocumentMoniker": "Resenas\\Model\\Resena.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\Resena.cs",
+              "RelativeToolTip": "Resenas\\Model\\Resena.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAA9wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T19:35:25.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ResenaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\ResenaRepository.cs",
+              "RelativeDocumentMoniker": "Resenas\\Model\\ResenaRepository.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\ResenaRepository.cs",
+              "RelativeToolTip": "Resenas\\Model\\ResenaRepository.cs",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAuwIYAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T19:35:21.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VerificarToken.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "RelativeDocumentMoniker": "Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "RelativeToolTip": "Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T19:31:40.382Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

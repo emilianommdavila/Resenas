@@ -4,9 +4,11 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Resenas.Middleware.Auth;
 using Resenas.Model;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq.Expressions;
 using System.Text.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
@@ -311,6 +313,15 @@ namespace Resenas.Controllers
                     error = ex.Message
                 });
             }
+        }
+
+
+        [HttpGet]
+        [Route("pruebaAuth")]
+        public dynamic pruebaAuth()
+        {
+            VerificarToken verif = new VerificarToken("http://localhost:3000");
+            return verif.obtenerUsuario("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbklEIjoiNjVlMjJkZGQzNzhlYmFkNzRhYjYyOTA5IiwidXNlcklEIjoiNjVlMjJkZGMzNzhlYmFkNzRhYjYyOTA4In0.acg7GAA5X5tnr0Vd85T4QONp6CoKcwYwCIDA-ALOrWs");
         }
     }
 }
