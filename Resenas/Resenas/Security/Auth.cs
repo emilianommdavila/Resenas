@@ -16,6 +16,7 @@ public interface IUser
     string Name { get; set; }
     string Login { get; set; }
     string[] Permissions { get; set; }
+    
 }
 
 public interface ISession

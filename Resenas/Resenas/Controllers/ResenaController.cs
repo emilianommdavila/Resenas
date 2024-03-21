@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Resenas.Middleware.Auth;
 using Resenas.Model;
+using Resenas.Security.Tokens;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Expressions;
@@ -318,10 +317,18 @@ namespace Resenas.Controllers
 
         [HttpGet]
         [Route("pruebaAuth")]
-        public dynamic pruebaAuth()
+        public async Task<User> pruebaAuth()
         {
+            string tokenUsuario = HttpContext.Request.Query["id"];
             VerificarToken verif = new VerificarToken("http://localhost:3000");
-            return verif.obtenerUsuario("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbklEIjoiNjVlMjJkZGQzNzhlYmFkNzRhYjYyOTA5IiwidXNlcklEIjoiNjVlMjJkZGMzNzhlYmFkNzRhYjYyOTA4In0.acg7GAA5X5tnr0Vd85T4QONp6CoKcwYwCIDA-ALOrWs");
+            return await verif.obtenerUsuario(tokenUsuario);
+        }
+
+        [HttpGet]
+        [Route("testRedis")]
+        public dynamic testRedis()
+        {
+            return Tokens.hola();
         }
     }
 }

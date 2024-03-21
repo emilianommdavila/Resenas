@@ -18,9 +18,4 @@ public class User : IUser
     {
         return JsonConvert.DeserializeObject<User>(json);
     }
-
-    public static implicit operator User(Task<User> v)
-    {
-        throw new NotImplementedException();
-    }
 }

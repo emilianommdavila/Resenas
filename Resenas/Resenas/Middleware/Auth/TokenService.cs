@@ -20,7 +20,7 @@ namespace Resenas.Middleware.Auth
                 throw new UnauthorizedException();
             }
         }
-        public void ValidateLoggedIn(string token)
+        public async void ValidateLoggedIn(string token)
         {
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -32,7 +32,7 @@ namespace Resenas.Middleware.Auth
                 return;
             }
 
-            var user = _verificarToken.obtenerUsuario(token);
+            var user = await _verificarToken.obtenerUsuario(token);
             if (user == null)
             {
                 throw new UnauthorizedException();
