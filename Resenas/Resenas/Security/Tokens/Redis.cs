@@ -1,4 +1,6 @@
-﻿using StackExchange.Redis;
+﻿using Newtonsoft.Json;
+using StackExchange.Redis;
+using System.Drawing;
 namespace Resenas.Security.Tokens
 {
     public class Redis
@@ -31,6 +33,40 @@ namespace Resenas.Security.Tokens
             // Cerramos la conexión a Redis
             redis.Close();
 
+        }
+        public static User verificarToken(string token) {
+            // Conexión a Redis
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost:6379");
+
+            // Obtenemos una instancia del servidor Redis
+            IDatabase db = redis.GetDatabase();
+            // Obtenemos el valor de la clave
+            string valor = db.StringGet(token);
+
+            if (valor != null)
+            {
+                Console.WriteLine("Se encontro el token en redis: " + valor);
+            }
+            else
+            {
+                Console.WriteLine("No se encontro el token en redis: " + valor);
+            }
+            redis.Close();
+            return JsonConvert.DeserializeObject<User>(valor);
+        }
+
+        public static void almacenarToken(string token, User user)
+        {
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost:6379");
+
+            // Obtenemos una instancia del servidor Redis
+            IDatabase db = redis.GetDatabase();
+
+            // Guardamos un valor en una clave
+            string userJson = JsonConvert.SerializeObject(user);
+            db.StringSet(token, userJson);
+            Console.WriteLine("Se guardo el token " + token);
+            redis.Close();
         }
        
     }

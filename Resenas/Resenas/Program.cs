@@ -1,3 +1,5 @@
+using Resenas.Middleware.Rabbit;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<Resenas.Middleware.Rabbit.Rabbit>();
 
 var app = builder.Build();
 
@@ -22,4 +25,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var rabbit = app.Services.GetRequiredService<Rabbit>();
+
 app.Run();
+
