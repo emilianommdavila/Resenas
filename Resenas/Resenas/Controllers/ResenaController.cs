@@ -4,6 +4,8 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Resenas.Middleware.Auth;
 using Resenas.Model;
+using Resenas.Model.Interfaces;
+using Resenas.Model.Repositories;
 using Resenas.Security.Tokens;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,14 +20,16 @@ namespace Resenas.Controllers
     [Route("resena")]
     public class ResenaController : ControllerBase
     {
-        private ResenaRepository resenaRepository;
-        public  ResenaController() {
-            var mongoDbSettings = new MongoDbSettings
-            {
-                ConnectionString = "mongodb://localhost:27017/",
-                DatabaseName = "resenas"                
-            };
-            this.resenaRepository = new ResenaRepository(mongoDbSettings);
+        //private ResenaRepository resenaRepository;
+        private readonly IResenaRepository _resenaRepository;
+        public  ResenaController(IResenaRepository resenaRepository) {
+            //var mongoDbSettings = new MongoDbSettings
+            //{
+            //    ConnectionString = "mongodb://localhost:27017/",
+            //    DatabaseName = "resenas"                
+            //};
+            //this.resenaRepository = new ResenaRepository(mongoDbSettings);
+            _resenaRepository = resenaRepository;
         }
         
 
@@ -87,7 +91,7 @@ namespace Resenas.Controllers
                 };
             }
 
-            var resena = resenaRepository.GetResenaByID(objectId);
+            var resena = _resenaRepository.GetResenaByID(objectId);
 
             if (resena == null)
             {
@@ -174,7 +178,7 @@ namespace Resenas.Controllers
             }
 
        
-            return resenaRepository.GetResenaByArticle(idProducto);
+            return _resenaRepository.GetResenaByArticle(idProducto);
         }
 
         [HttpGet]
@@ -195,7 +199,7 @@ namespace Resenas.Controllers
                     result = ""
                 };
             }       
-            return resenaRepository.GetResenaByUser(idUser);
+            return _resenaRepository.GetResenaByUser(idUser);
         }
 
         [HttpPost]
@@ -205,8 +209,8 @@ namespace Resenas.Controllers
             try
             {
                 Resena resena = MapDataToResena(optData);
-       
-                resenaRepository.InsertResena(resena);
+
+                _resenaRepository.InsertResena(resena);
                 return Ok(new
                 {
                     success = true,
@@ -233,7 +237,7 @@ namespace Resenas.Controllers
             {
                 //ObjectId idResena = ObjectId.Parse(HttpContext.Request.Query["idResena"]);
                 Resena resena = MapDataToResenaConID(optData);
-                resenaRepository.ModificarResena(resena);
+                _resenaRepository.ModificarResena(resena);
                 return Ok(new
                 {
                     success = true,
@@ -285,7 +289,7 @@ namespace Resenas.Controllers
             {
                
                 ObjectId idResena = ObjectId.Parse(HttpContext.Request.Query["id"]);               
-                bool resultado = resenaRepository.EliminarResena(idResena);
+                bool resultado = _resenaRepository.EliminarResena(idResena);
                 if (resultado == true)
                 {
                     return Ok(new
@@ -315,20 +319,20 @@ namespace Resenas.Controllers
         }
 
 
-        [HttpGet]
-        [Route("pruebaAuth")]
-        public async Task<User> pruebaAuth()
-        {
-            string tokenUsuario = HttpContext.Request.Query["id"];
-            VerificarToken verif = new VerificarToken("http://localhost:3000");
-            return await verif.obtenerUsuario(tokenUsuario);
-        }
+        //[HttpGet]
+        //[Route("pruebaAuth")]
+        //public async Task<User> pruebaAuth()
+        //{
+        //    string tokenUsuario = HttpContext.Request.Query["id"];
+        //    VerificarToken verif = new VerificarToken("http://localhost:3000");
+        //    return await verif.obtenerUsuario(tokenUsuario);
+        //}
 
-        [HttpGet]
-        [Route("testRedis")]
-        public dynamic testRedis()
-        {
-            return Tokens.hola();
-        }
+        //[HttpGet]
+        //[Route("testRedis")]
+        //public dynamic testRedis()
+        //{
+        //    return Tokens.hola();
+        //}
     }
 }

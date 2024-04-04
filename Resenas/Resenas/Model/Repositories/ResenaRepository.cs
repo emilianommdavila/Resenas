@@ -1,8 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Resenas.Model.Interfaces;
 using System;
 
-namespace Resenas.Model
+namespace Resenas.Model.Repositories
 {
     public class ResenaRepository : IResenaRepository
     {
@@ -17,7 +18,7 @@ namespace Resenas.Model
             }
 
             var client = new MongoClient(settings.ConnectionString);
-            _database = client.GetDatabase(settings.DatabaseName); 
+            _database = client.GetDatabase(settings.DatabaseName);
 
             if (_database == null)
             {
@@ -43,15 +44,16 @@ namespace Resenas.Model
 
         //Busca reseñas asociadas a un usuario
         public List<Resena> GetResenaByUser(int idUser)
-        {          
+        {
             var collection = _database.GetCollection<Resena>("resenas");
             var filter = Builders<Resena>.Filter.Eq(r => r.userID, idUser);
-            List<Resena> resenasEncontrada = collection.Find(filter).ToList<Resena>();
+            List<Resena> resenasEncontrada = collection.Find(filter).ToList();
 
             return resenasEncontrada;
         }
 
-        public Resena GetResenaByID(ObjectId objectId) {
+        public Resena GetResenaByID(ObjectId objectId)
+        {
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
@@ -82,7 +84,8 @@ namespace Resenas.Model
             return resena.punctuation;
         }
 
-        public Resena InsertResena(Resena resena) {
+        public Resena InsertResena(Resena resena)
+        {
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
@@ -95,7 +98,8 @@ namespace Resenas.Model
             return resenaInsert;
         }
 
-        public Resena ModificarResena(Resena resena) {
+        public Resena ModificarResena(Resena resena)
+        {
 
             if (_database == null)
             {
@@ -123,7 +127,8 @@ namespace Resenas.Model
         }
 
 
-        public bool EliminarResena(ObjectId idResena) {
+        public bool EliminarResena(ObjectId idResena)
+        {
 
             if (_database == null)
             {
@@ -146,8 +151,8 @@ namespace Resenas.Model
             else
             {
                 return true;
-            }      
+            }
         }
- 
+
     }
 }

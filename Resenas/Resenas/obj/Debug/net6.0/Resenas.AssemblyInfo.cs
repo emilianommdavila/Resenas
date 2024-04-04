@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Resenas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+936d224f7adb7c42860b763f1e8b16555075481f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0f2508de7121707cec5f4f3997a3e38f912f22b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Resenas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Resenas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
