@@ -206,6 +206,7 @@ C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Stac
 C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
 C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\RabbitMQ.Client.dll
 C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\System.Threading.Channels.dll
-C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\System.Net.Http.Formatting.dll
-C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\System.Web.Http.dll
-C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Swashbuckle.Core.dll
+C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Scrutor.dll
+C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\emili\Documents\Proyectos\Resenas\Resenas\Resenas\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

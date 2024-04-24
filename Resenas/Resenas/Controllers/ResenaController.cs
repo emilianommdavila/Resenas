@@ -7,13 +7,17 @@ using Resenas.Model;
 using Resenas.Model.Interfaces;
 using Resenas.Model.Repositories;
 using Resenas.Security.Tokens;
-using Swashbuckle.Swagger.Annotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Expressions;
 using System.Text.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Resenas.Controllers
 {
@@ -72,66 +76,113 @@ namespace Resenas.Controllers
             return await _verificarToken.obtenerUsuario(tokenUsuario);            
         }
 
-           
-        
 
+
+
+
+        //[HttpGet]
+        //[Route("obtenerResena")]
+        //public async Task<dynamic> obtenerResena() {
+
+        //    string idResena = HttpContext.Request.Query["idResena"].ToString();           
+
+        //    if (string.IsNullOrEmpty(idResena))
+        //    {
+        //        return new
+        //        {
+        //            success = false,
+        //            message = "Falta el ID del articulo",
+        //            result = ""
+        //        };
+        //    }
+
+        //    if (!ObjectId.TryParse(idResena, out ObjectId objectId))
+        //    {
+        //        return new
+        //        {
+        //            success = false,
+        //            message = "Formato del ID de reseña inválido",
+        //            result = ""
+        //        };
+        //    }
+
+        //    var resena = _resenaRepository.GetResenaByID(objectId);
+
+        //    if (resena == null)
+        //    {
+        //        return new
+        //        {
+        //            success = false,
+        //            message = "No se pudo encontrar la reseña",
+        //            result = ""
+        //        };
+        //    }
+
+        //    return new
+        //    {
+        //        success = true,
+        //        message = "Reseña encontrada",
+        //        result = resena
+        //    };
+        //}
 
         [HttpGet]
         [Route("obtenerResena")]
+        [SwaggerOperation(
+            Summary = "Obtiene una reseña por su ID",
+            Description = "Obtiene una reseña basada en el ID proporcionado.",
+            OperationId = "ObtenerResena"
+        )]
         [SwaggerResponse(200, "La reseña se obtiene correctamente", typeof(Resena))]
         [SwaggerResponse(400, "Solicitud inválida")]
-        [SwaggerResponse(401, "No autorizado")]
-        public async Task<dynamic> obtenerResena() {
-
-            string idResena = HttpContext.Request.Query["idResena"].ToString();           
-
-            if (string.IsNullOrEmpty(idResena))
-            {
-                return new
-                {
-                    success = false,
-                    message = "Falta el ID del articulo",
-                    result = ""
-                };
-            }
-
+        public async Task<IActionResult> obtenerResena(
+            [Required(ErrorMessage = "El ID de la reseña es requerido")] string idResena)
+        {
             if (!ObjectId.TryParse(idResena, out ObjectId objectId))
             {
-                return new
+                return BadRequest(new
                 {
                     success = false,
                     message = "Formato del ID de reseña inválido",
                     result = ""
-                };
+                });
             }
 
             var resena = _resenaRepository.GetResenaByID(objectId);
 
             if (resena == null)
             {
-                return new
+                return NotFound(new
                 {
                     success = false,
                     message = "No se pudo encontrar la reseña",
                     result = ""
-                };
+                });
             }
 
-            return new
+            return Ok(new
             {
                 success = true,
                 message = "Reseña encontrada",
                 result = resena
-            };
+            });
         }
 
-
         [HttpGet]
-        [Route("obtenerResenasDeArticulo")]
-        public async Task<dynamic> obtenerResenaDelArticulo()
+        [SwaggerOperation(
+            Summary = "Obtiene una lista de reseñas por su ID de articulo",
+            Description = "Obtiene una lista de reseñas por su ID de articulo proporcionado.",
+            OperationId = "ObtenerResenasPorArticulo"
+        )]
+        [SwaggerResponse(200, "La lista de reseñas se obtiene correctamente", typeof(Resena))]
+        [SwaggerResponse(400, "Solicitud inválida")]
+        [Route("ObtenerResenasPorArticulo")]
+        public async Task<dynamic> obtenerResenaDelArticulo(
+              [Required(ErrorMessage = "El ID de la reseña es requerido")] int idProducto)
         {
 
-            int idProducto = int.Parse(HttpContext.Request.Query["idProducto"].ToString());
+
+            idProducto = int.Parse(HttpContext.Request.Query["idProducto"].ToString());
             if (idProducto == null)
             {
                 return new
@@ -147,7 +198,14 @@ namespace Resenas.Controllers
         }
 
         [HttpGet]
-        [Route("obtenerResenasDeUsuario")]
+        [SwaggerOperation(
+            Summary = "Obtiene una lista de reseñas por su ID de usuario",
+            Description = "Obtiene una lista de reseñas por su ID de usuario proporcionado.",
+            OperationId = "ObtenerResenasPorUsuario"
+        )]
+        [SwaggerResponse(200, "La lista de reseñas se obtiene correctamente", typeof(Resena))]
+        [SwaggerResponse(400, "Solicitud inválida")]
+        [Route("ObtenerResenasPorUsuario")]
         public dynamic obtenerResenaPorUsuario()
         {
 
@@ -169,6 +227,14 @@ namespace Resenas.Controllers
 
         [HttpPost]
         [Route("guardarResena")]
+        [SwaggerOperation(
+       Summary = "Guardar una nueva reseña",
+       Description = "Guarda una nueva reseña en la base de datos.",
+       OperationId = "GuardarResena"
+   )]
+        [SwaggerResponse(200, "Reseña guardada correctamente", typeof(Resena))]
+        [SwaggerResponse(400, "Solicitud inválida")]
+        [SwaggerRequestExample(typeof(Resena), typeof(ResenaExample))]
         public async Task<IActionResult> GuardarResena([FromBody] JsonElement optData)
         {
             User usuario = await VerificarLogueo(optData);
@@ -301,5 +367,24 @@ namespace Resenas.Controllers
         {
             return Tokens.hola();
         }
+
+
+
+        public class ResenaExample : IExamplesProvider<Resena>
+        {
+            public Resena GetExamples()
+            {
+                return new Resena
+                {
+                    orderID = 1,
+                    valoration = 5,
+                    content = "Ejemplo de contenido de reseña."
+                };
+            }
+        }
+
+
     }
+
+
 }

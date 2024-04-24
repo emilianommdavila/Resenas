@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using Resenas.Model.Interfaces;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using Resenas.Middleware.Auth;
 
 public class Startup
@@ -20,7 +21,22 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSwaggerGen();
+        //services.AddSwaggerGen();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Version = "v1",
+                Title = "API de Resenas",
+                Description = "API para gestionar reseñas de productos",
+                Contact = new OpenApiContact
+                {
+                    Name = "Tu nombre",
+                    Email = "tu@email.com",
+                    Url = new Uri("https://example.com"),
+                },
+            });
+        });
         // Configuración de MongoDB
         services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDb"));
         services.Configure<VerificarToken>(Configuration.GetSection("ServicioAuth"));
@@ -56,8 +72,13 @@ public class Startup
     {
         if (env.IsDevelopment())
         {
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Resenas V1");
+            });
         }
 
         app.UseHttpsRedirection();
