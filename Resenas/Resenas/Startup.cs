@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using Resenas.Model.Interfaces;
 using Microsoft.OpenApi.Models;
+using Resenas.Middleware.Auth;
 
 public class Startup
 {
@@ -22,6 +23,7 @@ public class Startup
         services.AddSwaggerGen();
         // Configuración de MongoDB
         services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDb"));
+        services.Configure<VerificarToken>(Configuration.GetSection("ServicioAuth"));
 
         // Agregar el servicio de MongoDB
         services.AddSingleton<IMongoClient, MongoClient>(provider =>
@@ -35,6 +37,13 @@ public class Startup
         {
             var settings = provider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
             return new ResenaRepository(settings);
+        });
+        services.AddSingleton<HttpClient>();
+        services.AddSingleton<VerificarToken>(provider =>
+        {
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            var httpClient = provider.GetRequiredService<HttpClient>();
+            return new VerificarToken(httpClient, configuration);
         });
         services.AddSingleton<Resenas.Middleware.Rabbit.Rabbit>();
         services.AddAuthorization();

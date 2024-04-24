@@ -34,7 +34,7 @@ namespace Resenas.Security.Tokens
             redis.Close();
 
         }
-        public static User verificarToken(string token) {
+        public async static Task<User> verificarToken(string token) {
             // Conexión a Redis
             ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost:6379");
 
@@ -50,6 +50,7 @@ namespace Resenas.Security.Tokens
             else
             {
                 Console.WriteLine("No se encontro el token en redis: " + valor);
+                return null;
             }
             redis.Close();
             return JsonConvert.DeserializeObject<User>(valor);

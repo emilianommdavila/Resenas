@@ -6,7 +6,13 @@
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "optData",
+        "Type": "System.Text.Json.JsonElement",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -65,6 +71,36 @@
     "ContainingType": "Resenas.Controllers.ResenaController",
     "Method": "obtenerResenaPorUsuario",
     "RelativePath": "resena/obtenerResenasDeUsuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Resenas.Controllers.ResenaController",
+    "Method": "pruebaAuth",
+    "RelativePath": "resena/pruebaAuth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Resenas.Controllers.ResenaController",
+    "Method": "testRedis",
+    "RelativePath": "resena/testRedis",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

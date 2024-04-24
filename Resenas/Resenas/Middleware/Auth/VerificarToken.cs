@@ -10,25 +10,27 @@ namespace Resenas.Middleware.Auth
         private readonly HttpClient _httpClient;
         private readonly string _securityServerUrl;
 
-        public VerificarToken(string securityServerUrl)
+        //public VerificarToken(string securityServerUrl)
+        //{
+        //    _httpClient = new HttpClient();
+        //    _securityServerUrl = securityServerUrl;
+        //}
+
+        public VerificarToken(HttpClient httpClient, IConfiguration configuration)
         {
-            _httpClient = new HttpClient();
-            _securityServerUrl = securityServerUrl;
+            _httpClient = httpClient;
+            _securityServerUrl = configuration.GetValue<string>("ServicioAuth:_securityServerUrl");
         }
         public async Task<User> obtenerUsuario(string token)
-        {
-
-   
+        {   
             //Primero verificamos en Redis si tenemos el token activo para no consultar el sistemea de auth
-            User usuario = Redis.verificarToken(token);
-
-
-            //si no lo encuentra vamos al sistema de Auth
+            //Task<User> usuario = Redis.verificarToken(token);
+            User usuario = await Redis.verificarToken(token);
             if (usuario != null)
             {
                 return usuario;
-            }
-               
+            }               
+            //si no lo encuentra vamos al sistema de Auth
             try
             {
                 var requestUri = $"{_securityServerUrl}/v1/users/current";

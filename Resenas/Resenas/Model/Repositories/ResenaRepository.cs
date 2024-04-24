@@ -10,6 +10,7 @@ namespace Resenas.Model.Repositories
 
         private readonly IMongoDatabase _database;
 
+
         public ResenaRepository(MongoDbSettings settings)
         {
             if (settings == null)
@@ -43,8 +44,8 @@ namespace Resenas.Model.Repositories
 
 
         //Busca reseñas asociadas a un usuario
-        public List<Resena> GetResenaByUser(int idUser)
-        {
+        public List<Resena> GetResenaByUser(ObjectId idUser)
+        {          
             var collection = _database.GetCollection<Resena>("resenas");
             var filter = Builders<Resena>.Filter.Eq(r => r.userID, idUser);
             List<Resena> resenasEncontrada = collection.Find(filter).ToList();
