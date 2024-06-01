@@ -44,10 +44,11 @@ namespace Resenas.Model.Repositories
 
 
         //Busca reseñas asociadas a un usuario
-        public List<Resena> GetResenaByUser(ObjectId idUser)
-        {          
+        public List<Resena> GetResenaByUser(string idUser)
+        {
+            ObjectId idUserMongo = ObjectId.Parse(idUser);
             var collection = _database.GetCollection<Resena>("resenas");
-            var filter = Builders<Resena>.Filter.Eq(r => r.userID, idUser);
+            var filter = Builders<Resena>.Filter.Eq(r => ObjectId.Parse(r.userID), idUserMongo);
             List<Resena> resenasEncontrada = collection.Find(filter).ToList();
 
             return resenasEncontrada;
@@ -55,31 +56,37 @@ namespace Resenas.Model.Repositories
 
         public Resena GetResenaByID(ObjectId objectId)
         {
+            ObjectId objectIdMongo = objectId;
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
             }
 
+           // var collection = _database.GetCollection<Resena>("resenas");
+            //var projection = Builders<Resena>.Projection
+              // .Exclude(r => r.idMongo);
+
+
+            //var filter = Builders<Resena>.Filter.Eq(r => ObjectId.Parse(r.idMongo), objectIdMongo);
+            //var resena = collection.Find(filter).Project<Resena>(projection).FirstOrDefault();
+
+
             var collection = _database.GetCollection<Resena>("resenas");
-            var projection = Builders<Resena>.Projection
-               .Exclude(r => r.idMongo);
-
-
             var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectId);
-            var resena = collection.Find(filter).Project<Resena>(projection).FirstOrDefault();
+            var resena = collection.Find(filter).FirstOrDefault();
             return resena;
         }
 
         public int GetPunctuationByID(ObjectId objectId)
         {
-
+            ObjectId objectIdMongo =objectId;
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
             }
 
             var collection = _database.GetCollection<Resena>("resenas");
-            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectId);
+            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectIdMongo);
             var resena = collection.Find(filter).FirstOrDefault();
 
             return resena.punctuation;
@@ -114,7 +121,7 @@ namespace Resenas.Model.Repositories
             {
                 //userID = 2,
                 //created = filter.created,
-                idMongo = ObjectId.Parse(resena.idMongo.ToString()),
+                //idMongo = ObjectId.Parse(resena.idMongo.ToString()),
                 updated = DateTime.Now,
                 //orderID = resena.orderID,
                 //articleId = resena.articleId,
@@ -130,7 +137,7 @@ namespace Resenas.Model.Repositories
 
         public bool EliminarResena(ObjectId idResena)
         {
-
+            ObjectId idResenaMongo = idResena;
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
@@ -138,7 +145,7 @@ namespace Resenas.Model.Repositories
 
             var collection = _database.GetCollection<Resena>("resenas");
 
-            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, idResena);
+            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, idResenaMongo);
             if (collection.Find(filter).FirstOrDefault() == null)
             {
                 return false;

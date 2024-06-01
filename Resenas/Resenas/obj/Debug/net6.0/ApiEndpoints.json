@@ -31,7 +31,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Resenas.Model.Resena",
+        "Type": "Resenas.Model.ResenaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -78,7 +78,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Resenas.Model.Resena",
+        "Type": "Resenas.Model.ResenaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -109,7 +109,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Resenas.Model.Resena",
+        "Type": "Resenas.Model.ResenaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -131,10 +131,16 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "idUser",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "Resenas.Model.Resena",
+        "Type": "Resenas.Model.ResenaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -168,15 +174,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "testRedis",
-    "RelativePath": "resena/testRedis",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
   }
 ]

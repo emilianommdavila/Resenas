@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\middleware\\auth\\verificartoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\middleware\\auth\\verificartoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\controllers\\resenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\controllers\\resenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\model\\interfaces\\iredisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\model\\interfaces\\iredisservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\security\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\security\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\security\\tokens\\redis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\security\\tokens\\redis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\middleware\\rabbit\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\middleware\\rabbit\\rabbit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|c:\\users\\emili\\documents\\proyectos\\resenas\\resenas\\resenas\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21ED523-D069-4AB4-8C35-415FAF5CB4FE}|Resenas\\Resenas.csproj|solutionrelative:resenas\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,46 +38,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 347,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Security\\User.cs",
-              "RelativeDocumentMoniker": "Resenas\\Security\\User.cs",
-              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Security\\User.cs",
-              "RelativeToolTip": "Resenas\\Security\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T23:19:41.388Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Startup.cs",
-              "RelativeDocumentMoniker": "Resenas\\Startup.cs",
-              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Startup.cs",
-              "RelativeToolTip": "Resenas\\Startup.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAuwFgAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T23:59:03.87Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "ResenaController.cs",
               "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Controllers\\ResenaController.cs",
               "RelativeDocumentMoniker": "Resenas\\Controllers\\ResenaController.cs",
               "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Controllers\\ResenaController.cs",
               "RelativeToolTip": "Resenas\\Controllers\\ResenaController.cs",
-              "ViewState": "AQIAANkAAAAAAAAAAAAwwOwAAABGAAAA",
+              "ViewState": "AQIAAHABAAAAAAAAAAAawHwBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T23:26:59.475Z",
+              "WhenOpened": "2024-06-01T15:11:58.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IRedisService.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\Interfaces\\IRedisService.cs",
+              "RelativeDocumentMoniker": "Resenas\\Model\\Interfaces\\IRedisService.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Model\\Interfaces\\IRedisService.cs",
+              "RelativeToolTip": "Resenas\\Model\\Interfaces\\IRedisService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T15:10:52.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\appsettings.json",
+              "RelativeDocumentMoniker": "Resenas\\appsettings.json",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\appsettings.json",
+              "RelativeToolTip": "Resenas\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-01T15:09:57.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Redis.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Security\\Tokens\\Redis.cs",
+              "RelativeDocumentMoniker": "Resenas\\Security\\Tokens\\Redis.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Security\\Tokens\\Redis.cs",
+              "RelativeToolTip": "Resenas\\Security\\Tokens\\Redis.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAIwAcAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T15:02:52.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VerificarToken.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "RelativeDocumentMoniker": "Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "RelativeToolTip": "Resenas\\Middleware\\Auth\\VerificarToken.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAawDEAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T15:01:11.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Rabbit.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Rabbit\\Rabbit.cs",
+              "RelativeDocumentMoniker": "Resenas\\Middleware\\Rabbit\\Rabbit.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Middleware\\Rabbit\\Rabbit.cs",
+              "RelativeToolTip": "Resenas\\Middleware\\Rabbit\\Rabbit.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T14:33:39.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Startup.cs",
+              "RelativeDocumentMoniker": "Resenas\\Startup.cs",
+              "ToolTip": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Startup.cs",
+              "RelativeToolTip": "Resenas\\Startup.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAewGsAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T03:32:22.38Z",
               "EditorCaption": ""
             }
           ]

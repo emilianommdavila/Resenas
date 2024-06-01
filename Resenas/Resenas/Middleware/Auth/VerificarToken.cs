@@ -25,7 +25,7 @@ namespace Resenas.Middleware.Auth
         {   
             //Primero verificamos en Redis si tenemos el token activo para no consultar el sistemea de auth
             //Task<User> usuario = Redis.verificarToken(token);
-            User usuario = await Redis.verificarToken(token);
+            User usuario = await RedisService.verificarToken(token);
             if (usuario != null)
             {
                 return usuario;
@@ -45,7 +45,7 @@ namespace Resenas.Middleware.Auth
                 User hola = User.FromJson(responseBody);
                 Console.WriteLine(hola.Login);
                 // Deserializar el JSON y devolver el resultado
-                Redis.almacenarToken(token, hola);
+                RedisService.almacenarToken(token, hola);
 
                 return User.FromJson(responseBody);
             }

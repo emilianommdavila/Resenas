@@ -9,6 +9,8 @@ using Resenas.Model.Interfaces;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using Resenas.Middleware.Auth;
+using Resenas.Middleware.Rabbit;
+using RabbitMQ.Client;
 
 public class Startup
 {
@@ -21,7 +23,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddSwaggerGen();
+       // Configuración de Swagger
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
@@ -37,23 +39,41 @@ public class Startup
                 },
             });
         });
+
         // Configuración de MongoDB
         services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDb"));
         services.Configure<VerificarToken>(Configuration.GetSection("ServicioAuth"));
 
-        // Agregar el servicio de MongoDB
+        // Configuración de RabbitMQ
+        services.Configure<RabbitMQSettings>(Configuration.GetSection("RabbitMQ"));
+        services.AddSingleton<IConnection>(provider =>
+        {
+            var rabbitMQSettings = provider.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
+            var factory = new ConnectionFactory()
+            {
+                HostName = rabbitMQSettings.HostName,
+                UserName = rabbitMQSettings.UserName,
+                Password = rabbitMQSettings.Password
+            };
+          
+            return factory.CreateConnection();
+        });
+
+        // Registrar servicios de MongoDB
         services.AddSingleton<IMongoClient, MongoClient>(provider =>
         {
             var settings = provider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
             return new MongoClient(settings.ConnectionString);
         });
 
-        // Registrar el servicio ResenaRepository con la dependencia de MongoDbSettings resuelta
+        // Registrar Repositories
         services.AddSingleton<IResenaRepository>(provider =>
         {
             var settings = provider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
             return new ResenaRepository(settings);
         });
+
+        // Registrar otros servicios
         services.AddSingleton<HttpClient>();
         services.AddSingleton<VerificarToken>(provider =>
         {
@@ -61,19 +81,20 @@ public class Startup
             var httpClient = provider.GetRequiredService<HttpClient>();
             return new VerificarToken(httpClient, configuration);
         });
-        services.AddSingleton<Resenas.Middleware.Rabbit.Rabbit>();
+
+        // Registrar RabbitMQService
+        Console.WriteLine("Rabbit");
+        services.AddSingleton<IRabbitMQService, Rabbit>();
+        Console.WriteLine("Termino Rabbit");
         services.AddAuthorization();
         services.AddControllers();
 
-        // Otros servicios...
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
-            //app.UseSwagger();
-            //app.UseSwaggerUI();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -82,11 +103,14 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthorization();
         app.UseRouting();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
+        // Inicializar el servicio RabbitMQ
+        var rabbitService = app.ApplicationServices.GetService<IRabbitMQService>();
+
     }
 }

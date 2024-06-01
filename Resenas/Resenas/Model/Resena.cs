@@ -14,7 +14,7 @@ namespace Resenas.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId idMongo { get; set; }
         public int id { get; set; }// posible deshuso
-        public ObjectId userID { get; set; }
+        public string userID { get; set; }
         public DateTime created { get; set; }
         public DateTime updated { get; set; }
         public int orderID { get; set; }
