@@ -56,14 +56,14 @@ namespace Resenas.Security.Tokens
             }
         }
 
-        internal static async Task<User> verificarToken(string token)
-        {
-            throw new NotImplementedException();
-        }
+        //internal static async Task<User> verificarToken(string token)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        internal static void almacenarToken(string token, User hola)
-        {
-            throw new NotImplementedException();
-        }
+        //internal static void almacenarToken(string token, User hola)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

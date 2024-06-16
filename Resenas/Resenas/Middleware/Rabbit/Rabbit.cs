@@ -1,6 +1,8 @@
-﻿using RabbitMQ.Client;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Resenas.Model.Interfaces;
+using Resenas.Security.Tokens;
 using System.Text;
 
 namespace Resenas.Middleware.Rabbit
@@ -10,11 +12,14 @@ namespace Resenas.Middleware.Rabbit
         private readonly IConnection _connection;
         private readonly IModel _channel;
         private readonly string _exchangeName = "auth";
+        private readonly IRedisService _redisService;
 
-        public Rabbit(IConnection connection)
+        public Rabbit(IConnection connection, IRedisService redisService)
         {
             _connection = connection;
-            _channel = _connection.CreateModel();           
+            _channel = _connection.CreateModel();
+            _redisService = redisService;
+            Console.WriteLine(" Esta andando");
             ConfigureRabbitMQ();
             StartListening();
         }
@@ -37,6 +42,11 @@ namespace Resenas.Middleware.Rabbit
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received {0}", message);
                 // Aquí debes eliminar el token de Redis
+                var logoutMessage = JsonConvert.DeserializeObject<LogoutMessage>(message);
+                var token = ExtraerToken(logoutMessage.Message);
+
+                // Eliminar el token de Redis
+                _redisService.EliminarToken(token);
             };
 
             _channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
@@ -70,5 +80,20 @@ namespace Resenas.Middleware.Rabbit
 
             _channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
         }
+
+        private string ExtraerToken(string message)
+        {
+            const string bearerPrefix = "bearer ";
+            if (message.StartsWith(bearerPrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                return message.Substring(bearerPrefix.Length).Trim();
+            }
+            return message;
+        }
+    }
+    public class LogoutMessage
+    {
+        public string Type { get; set; }
+        public string Message { get; set; }
     }
 }

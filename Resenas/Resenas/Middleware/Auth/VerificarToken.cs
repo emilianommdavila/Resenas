@@ -9,6 +9,7 @@ namespace Resenas.Middleware.Auth
     {
         private readonly HttpClient _httpClient;
         private readonly string _securityServerUrl;
+        private readonly IRedisService _redisService;
 
         //public VerificarToken(string securityServerUrl)
         //{
@@ -16,16 +17,17 @@ namespace Resenas.Middleware.Auth
         //    _securityServerUrl = securityServerUrl;
         //}
 
-        public VerificarToken(HttpClient httpClient, IConfiguration configuration)
+        public VerificarToken(HttpClient httpClient, IConfiguration configuration, IRedisService redisService)
         {
             _httpClient = httpClient;
             _securityServerUrl = configuration.GetValue<string>("ServicioAuth:_securityServerUrl");
+            _redisService = redisService;
         }
         public async Task<User> obtenerUsuario(string token)
         {   
             //Primero verificamos en Redis si tenemos el token activo para no consultar el sistemea de auth
             //Task<User> usuario = Redis.verificarToken(token);
-            User usuario = await RedisService.verificarToken(token);
+            User usuario = await _redisService.VerificarToken(token);
             if (usuario != null)
             {
                 return usuario;
@@ -40,12 +42,12 @@ namespace Resenas.Middleware.Auth
                 response.EnsureSuccessStatusCode(); // Throws if not successful
 
                 var responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody); // Imprime el JSON para verificar su formato
-                Console.WriteLine(User.FromJson(responseBody) + "fasf"); // Imprime el JSON para verificar su formato
+                //Console.WriteLine(responseBody); // Imprime el JSON para verificar su formato
+                //Console.WriteLine(User.FromJson(responseBody) + "fasf"); // Imprime el JSON para verificar su formato
                 User hola = User.FromJson(responseBody);
                 Console.WriteLine(hola.Login);
                 // Deserializar el JSON y devolver el resultado
-                RedisService.almacenarToken(token, hola);
+                _redisService.AlmacenarToken(token, hola);
 
                 return User.FromJson(responseBody);
             }
