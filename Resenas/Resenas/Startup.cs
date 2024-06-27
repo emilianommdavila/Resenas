@@ -74,13 +74,13 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "API de Resenas",
-                Description = "API para gestionar reseñas de productos",
+                Title = "Microservicio de Resenas",
+                Description = "Microservicio para gestionar reseñas de productos",
                 Contact = new OpenApiContact
                 {
-                    Name = "Tu nombre",
-                    Email = "tu@email.com",
-                    Url = new Uri("https://example.com"),
+                    Name = "Emiliano Dávila",
+                    Email = "emilianommdavila@gmail.com",
+                    //Url = new Uri("https://example.com"),
                 },
             });
         });

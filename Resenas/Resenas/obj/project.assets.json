@@ -4262,11 +4262,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
+      "projectUniqueName": "C:\\Users\\emili\\OneDrive\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
       "projectName": "Resenas",
-      "projectPath": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
+      "projectPath": "C:\\Users\\emili\\OneDrive\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
       "packagesPath": "C:\\Users\\emili\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\obj\\",
+      "outputPath": "C:\\Users\\emili\\OneDrive\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\emili\\AppData\\Roaming\\NuGet\\NuGet.Config",

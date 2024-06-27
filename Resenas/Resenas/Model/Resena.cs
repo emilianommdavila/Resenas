@@ -22,7 +22,7 @@ namespace Resenas.Model
         public int valoration { get; set; }
         public string? content { get; set; }
         public string? imageUrl { get; set; }
-        public int punctuation { get; set; }
+        public int puntuation { get; set; }
         public List<PuntiacionDeResena> idUsuariosConPuntuacionEnEstaResena { get; set; }
 
     }

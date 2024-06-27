@@ -1,16 +1,21 @@
 [
   {
     "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "eliminarResena",
+    "Method": "EliminarResena",
     "RelativePath": "resena/eliminarResena",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "optData",
-        "Type": "System.Text.Json.JsonElement",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -24,9 +29,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "optData",
-        "Type": "System.Text.Json.JsonElement",
+        "Name": "resenaDto",
+        "Type": "Resenas.Model.ResenaRequestDto",
         "IsRequired": true
+      },
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -48,23 +58,43 @@
   },
   {
     "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "modificarResena",
+    "Method": "ModificarResena",
     "RelativePath": "resena/modificarResena",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "optData",
-        "Type": "System.Text.Json.JsonElement",
+        "Name": "resenaDto",
+        "Type": "Resenas.Model.ResenaRequestDto",
         "IsRequired": true
+      },
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Resenas.Model.ResenaDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      }
+    ]
   },
   {
     "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "obtenerResena",
+    "Method": "ObtenerResena",
     "RelativePath": "resena/obtenerResena",
     "HttpMethod": "GET",
     "IsController": true,
@@ -95,7 +125,7 @@
   },
   {
     "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "obtenerResenaDelArticulo",
+    "Method": "ObtenerResenaDelArticulo",
     "RelativePath": "resena/ObtenerResenasPorArticulo",
     "HttpMethod": "GET",
     "IsController": true,
@@ -126,7 +156,7 @@
   },
   {
     "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "obtenerResenaPorUsuario",
+    "Method": "ObtenerResenaPorUsuario",
     "RelativePath": "resena/ObtenerResenasPorUsuario",
     "HttpMethod": "GET",
     "IsController": true,
@@ -152,26 +182,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "Resenas.Controllers.ResenaController",
-    "Method": "pruebaAuth",
-    "RelativePath": "resena/pruebaAuth",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "User",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
       }
     ]
   }

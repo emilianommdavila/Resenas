@@ -1,4 +1,6 @@
-﻿namespace Resenas.Model
+﻿using System.Text.Json;
+
+namespace Resenas.Model
 {
     public class ResenaDto
     {
@@ -11,9 +13,7 @@
         public int articleId { get; set; }
         public int valoration { get; set; }
         public string? content { get; set; }
-        public string? imageUrl { get; set; }
-        public int punctuation { get; set; }
-        public List<PuntiacionDeResena> idUsuariosConPuntuacionEnEstaResena { get; set; }
+        public int puntuation { get; set; }
 
         public static ResenaDto MapToResenaDto(Resena resena)
         {
@@ -28,10 +28,39 @@
                 articleId = resena.articleId,
                 valoration = resena.valoration,
                 content = resena.content,
-                imageUrl = resena.imageUrl,
-                punctuation = resena.punctuation,
-                idUsuariosConPuntuacionEnEstaResena = resena.idUsuariosConPuntuacionEnEstaResena
+                puntuation = resena.puntuation
             };
+        }
+    }
+
+    public class ResenaRequestDto
+    {
+        public int orderID { get; set; }
+        public int articleID { get; set; }
+        public int valoration { get; set; }
+        public string content { get; set; }
+    }
+
+    public class ResenaExample
+    {
+        public JsonElement GetExamples()
+        {
+            //var example = new
+            //{
+            //    orderID = 1,
+            //    valoration = 5,
+            //    content = "Ejemplo de contenido de reseña."
+            //};
+            //var jsonString = JsonSerializer.Serialize(example);
+            //return JsonSerializer.Deserialize<JsonElement>(jsonString);
+            var example = (new
+            {
+                success = true,
+                message = "La reseña se modifico correctamente"
+            });
+            var jsonString = JsonSerializer.Serialize(example);
+            //return jsonString;
+            return JsonSerializer.Deserialize<JsonElement>(jsonString);
         }
     }
 }

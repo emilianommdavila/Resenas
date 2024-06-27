@@ -44,14 +44,23 @@ namespace Resenas.Model.Repositories
 
 
         //Busca reseñas asociadas a un usuario
+        //public List<Resena> GetResenaByUser(string idUser)
+        //{
+        //    ObjectId idUserMongo = ObjectId.Parse(idUser);
+        //    var collection = _database.GetCollection<Resena>("resenas");
+        //    var filter = Builders<Resena>.Filter.Eq(r => ObjectId.Parse(r.userID), idUserMongo);
+        //    List<Resena> resenasEncontrada = collection.Find(filter).ToList();
+
+        //    return resenasEncontrada;
+        //}
+
         public List<Resena> GetResenaByUser(string idUser)
         {
-            ObjectId idUserMongo = ObjectId.Parse(idUser);
             var collection = _database.GetCollection<Resena>("resenas");
-            var filter = Builders<Resena>.Filter.Eq(r => ObjectId.Parse(r.userID), idUserMongo);
-            List<Resena> resenasEncontrada = collection.Find(filter).ToList();
+            var filter = Builders<Resena>.Filter.Eq(r => r.userID, idUser);
+            List<Resena> resenasEncontradas = collection.Find(filter).ToList();
 
-            return resenasEncontrada;
+            return resenasEncontradas;
         }
 
         public Resena GetResenaByID(ObjectId objectId)
@@ -62,9 +71,9 @@ namespace Resenas.Model.Repositories
                 throw new InvalidOperationException("La BD es nula");
             }
 
-           // var collection = _database.GetCollection<Resena>("resenas");
+            // var collection = _database.GetCollection<Resena>("resenas");
             //var projection = Builders<Resena>.Projection
-              // .Exclude(r => r.idMongo);
+            // .Exclude(r => r.idMongo);
 
 
             //var filter = Builders<Resena>.Filter.Eq(r => ObjectId.Parse(r.idMongo), objectIdMongo);
@@ -72,9 +81,11 @@ namespace Resenas.Model.Repositories
 
 
             var collection = _database.GetCollection<Resena>("resenas");
-            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectId);
+            var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectIdMongo);
             var resena = collection.Find(filter).FirstOrDefault();
             return resena;
+
+
         }
 
         public int GetPunctuationByID(ObjectId objectId)
@@ -89,7 +100,7 @@ namespace Resenas.Model.Repositories
             var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, objectIdMongo);
             var resena = collection.Find(filter).FirstOrDefault();
 
-            return resena.punctuation;
+            return resena.puntuation;
         }
 
         public Resena InsertResena(Resena resena)
@@ -108,7 +119,6 @@ namespace Resenas.Model.Repositories
 
         public Resena ModificarResena(Resena resena)
         {
-
             if (_database == null)
             {
                 throw new InvalidOperationException("La BD es nula");
@@ -117,22 +127,26 @@ namespace Resenas.Model.Repositories
             var collection = _database.GetCollection<Resena>("resenas");
 
             var filter = Builders<Resena>.Filter.Eq(r => r.idMongo, resena.idMongo);
-            var replacement = new Resena()
-            {
-                //userID = 2,
-                //created = filter.created,
-                //idMongo = ObjectId.Parse(resena.idMongo.ToString()),
-                updated = DateTime.Now,
-                //orderID = resena.orderID,
-                //articleId = resena.articleId,
-                valoration = resena.valoration,
-                content = resena.content,
-                imageUrl = "notengo"
-            };
 
-            var result = collection.ReplaceOne(filter, replacement, new ReplaceOptions { IsUpsert = true });
-            return replacement;
+            // Obtén el documento existente
+            var existingResena = collection.Find(filter).FirstOrDefault();
+
+            if (existingResena == null)
+            {
+                throw new InvalidOperationException("La reseña no existe");
+            }
+
+            // Actualiza solo los campos necesarios
+            existingResena.updated = DateTime.Now;
+            existingResena.valoration = resena.valoration;
+            existingResena.content = resena.content;
+            existingResena.imageUrl = "notengo";
+
+            // Reemplaza el documento existente
+            var result = collection.ReplaceOne(filter, existingResena, new ReplaceOptions { IsUpsert = true });
+            return existingResena;
         }
+
 
 
         public bool EliminarResena(ObjectId idResena)

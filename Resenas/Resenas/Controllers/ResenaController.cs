@@ -7,18 +7,12 @@ using Resenas.Model;
 using Resenas.Model.Interfaces;
 using Resenas.Model.Repositories;
 using Resenas.Security.Tokens;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq.Expressions;
 using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel.DataAnnotations;
-using Swashbuckle.AspNetCore.Filters;
-using Azure.Core;
 
 namespace Resenas.Controllers
 {
@@ -26,105 +20,66 @@ namespace Resenas.Controllers
     [Route("resena")]
     public class ResenaController : ControllerBase
     {
-        //private ResenaRepository resenaRepository;
         private readonly VerificarToken _verificarToken;
         private readonly IResenaRepository _resenaRepository;
 
-        public  ResenaController(IResenaRepository resenaRepository, VerificarToken verificarToken) {
+        public ResenaController(IResenaRepository resenaRepository, VerificarToken verificarToken)
+        {
             _resenaRepository = resenaRepository;
             _verificarToken = verificarToken;
         }
-        
 
-        private Resena MapDataToResena(JsonElement optData,User usuario)
+        private Resena MapDataToResena(JsonElement optData, User usuario)
         {
-            Resena resena = new Resena();
-            resena.orderID = optData.GetProperty("orderID").GetInt32();
-            resena.userID = usuario.Id; 
-            resena.articleId = optData.GetProperty("articleID").GetInt32();
-            resena.valoration = optData.GetProperty("valoration").GetInt32();
-            resena.content = optData.GetProperty("content").GetString();
-            resena.created = DateTime.Now;
-            resena.updated = DateTime.Now;
-            resena.imageUrl = "notengo";
+            return new Resena
+            {
+                orderID = optData.GetProperty("orderID").GetInt32(),
+                userID = usuario.Id,
+                articleId = optData.GetProperty("articleID").GetInt32(),
+                valoration = optData.GetProperty("valoration").GetInt32(),
+                content = optData.GetProperty("content").GetString(),
+                created = DateTime.Now,
+                updated = DateTime.Now,
+                imageUrl = "notengo"
+            };
+        }
 
-            return resena;
+        private Resena MapDataToResenaDtos(ResenaRequestDto optData, User usuario)
+        {
+            return new Resena
+            {
+                orderID = optData.orderID,
+                userID = usuario.Id,
+                articleId = optData.articleID,
+                valoration = optData.valoration,
+                content = optData.content,
+                created = DateTime.Now,
+                updated = DateTime.Now,
+                imageUrl = "notengo"
+            };
         }
 
         private Resena MapDataToResenaConID(JsonElement optData, User usuario)
         {
-            Resena resena = new Resena();
-            resena.orderID = optData.GetProperty("orderID").GetInt32();
-            resena.userID = usuario.Id; 
-            resena.idMongo = ObjectId.Parse(optData.GetProperty("id").GetString());
-            resena.articleId = optData.GetProperty("articleID").GetInt32();
-            resena.valoration = optData.GetProperty("valoration").GetInt32();
-            resena.content = optData.GetProperty("content").GetString();
-            resena.created = DateTime.Now;
-            resena.updated = DateTime.Now;
-            resena.imageUrl = "notengo";
-
-            return resena;
-        }
-
-        private async Task<User> VerificarLogueo(JsonElement optData) {
-            string tokenUsuario = optData.GetProperty("userID").GetString();
-            if (tokenUsuario == null)
+            return new Resena
             {
-                return null;
-            }
-            return await _verificarToken.obtenerUsuario(tokenUsuario);            
+                orderID = optData.GetProperty("orderID").GetInt32(),
+                userID = usuario.Id,
+                idMongo = ObjectId.Parse(optData.GetProperty("id").GetString()),
+                articleId = optData.GetProperty("articleID").GetInt32(),
+                valoration = optData.GetProperty("valoration").GetInt32(),
+                content = optData.GetProperty("content").GetString(),
+                created = DateTime.Now,
+                updated = DateTime.Now,
+                imageUrl = "notengo"
+            };
         }
 
-
-
-
-
-        //[HttpGet]
-        //[Route("obtenerResena")]
-        //public async Task<dynamic> obtenerResena() {
-
-        //    string idResena = HttpContext.Request.Query["idResena"].ToString();           
-
-        //    if (string.IsNullOrEmpty(idResena))
-        //    {
-        //        return new
-        //        {
-        //            success = false,
-        //            message = "Falta el ID del articulo",
-        //            result = ""
-        //        };
-        //    }
-
-        //    if (!ObjectId.TryParse(idResena, out ObjectId objectId))
-        //    {
-        //        return new
-        //        {
-        //            success = false,
-        //            message = "Formato del ID de reseña inválido",
-        //            result = ""
-        //        };
-        //    }
-
-        //    var resena = _resenaRepository.GetResenaByID(objectId);
-
-        //    if (resena == null)
-        //    {
-        //        return new
-        //        {
-        //            success = false,
-        //            message = "No se pudo encontrar la reseña",
-        //            result = ""
-        //        };
-        //    }
-
-        //    return new
-        //    {
-        //        success = true,
-        //        message = "Reseña encontrada",
-        //        result = resena
-        //    };
-        //}
+        [NonAction]
+        public async Task<User> VerificarLogueo(string token)
+        {
+            return await _verificarToken.obtenerUsuario(token);
+        }
 
         [HttpGet]
         [Route("obtenerResena")]
@@ -135,10 +90,9 @@ namespace Resenas.Controllers
         )]
         [SwaggerResponse(200, "La reseña se obtiene correctamente", typeof(ResenaDto))]
         [SwaggerResponse(400, "Solicitud inválida")]
-        public async Task<IActionResult> obtenerResena([FromQuery, Required(ErrorMessage = "El ID de la reseña es requerido")] string idResena)
-        {           
+        public async Task<IActionResult> ObtenerResena([FromQuery, Required(ErrorMessage = "El ID de la reseña es requerido")] string idResena)
+        {
             var resena = _resenaRepository.GetResenaByID(ObjectId.Parse(idResena));
-
             if (resena == null)
             {
                 return NotFound(new
@@ -158,40 +112,32 @@ namespace Resenas.Controllers
         }
 
         [HttpGet]
+        [Route("ObtenerResenasPorArticulo")]
         [SwaggerOperation(
-            Summary = "Obtiene una lista de reseñas por su ID de articulo",
-            Description = "Obtiene una lista de reseñas por su ID de articulo proporcionado.",
+            Summary = "Obtiene una lista de reseñas por su ID de artículo",
+            Description = "Obtiene una lista de reseñas por su ID de artículo proporcionado.",
             OperationId = "ObtenerResenasPorArticulo"
         )]
         [SwaggerResponse(200, "La lista de reseñas se obtiene correctamente", typeof(ResenaDto))]
         [SwaggerResponse(400, "Solicitud inválida")]
-        [Route("ObtenerResenasPorArticulo")]
-        public async Task<dynamic> obtenerResenaDelArticulo(
-              [Required(ErrorMessage = "El ID de la reseña es requerido")] int idProducto)
+        public async Task<IActionResult> ObtenerResenaDelArticulo([Required(ErrorMessage = "El ID del producto es requerido")] int idProducto)
         {
-
-
-            idProducto = int.Parse(HttpContext.Request.Query["idProducto"].ToString());
-            if (idProducto == null)
+            var resenas = _resenaRepository.GetResenaByArticle(idProducto);
+            if (resenas == null)
             {
-                return new
+                return NotFound(new
                 {
                     success = false,
-                    message = "Falta el ID del producto",
+                    message = "No se pudieron encontrar reseñas para este producto",
                     result = ""
-                };
+                });
             }
-
-            List<ResenaDto> resenaDtoLista = new List<ResenaDto>();
-            foreach (Resena res in _resenaRepository.GetResenaByArticle(idProducto))
-            {
-                resenaDtoLista.Add(ResenaDto.MapToResenaDto(res));
-            }
-            
-            return resenaDtoLista;
+            var resenaDtoLista = resenas.Select(ResenaDto.MapToResenaDto).ToList();
+            return Ok(resenaDtoLista);
         }
 
         [HttpGet]
+        [Route("ObtenerResenasPorUsuario")]
         [SwaggerOperation(
             Summary = "Obtiene una lista de reseñas por su ID de usuario",
             Description = "Obtiene una lista de reseñas por su ID de usuario proporcionado.",
@@ -199,41 +145,19 @@ namespace Resenas.Controllers
         )]
         [SwaggerResponse(200, "La lista de reseñas se obtiene correctamente", typeof(ResenaDto))]
         [SwaggerResponse(400, "Solicitud inválida")]
-        [Route("ObtenerResenasPorUsuario")]
-        public async Task<IActionResult> obtenerResenaPorUsuario(
-            [Required(ErrorMessage = "El ID de la reseña es requerido")] string idUser)
+        public async Task<IActionResult> ObtenerResenaPorUsuario([Required(ErrorMessage = "El ID del usuario es requerido")] string idUser)
         {
-
-            //var data = JsonConvert.DeserializeObject<dynamic>(optData.ToString());           
-
-
-            //objectId = ObjectId.Parse(HttpContext.Request.Query["idUser"]);
-            //if (objectId == null)
-            //{
-            //    return new
-            //    {
-            //        success = false,
-            //        message = "Falta el ID del usuario",
-            //        result = ""
-            //    };
-            //}
-            //
-            List<Resena> listaResenas = _resenaRepository.GetResenaByUser(idUser);
-            if (listaResenas == null)
+            var resenas = _resenaRepository.GetResenaByUser(idUser);
+            if (resenas == null)
             {
                 return NotFound(new
                 {
                     success = false,
-                    message = "No se pudo encontrar reseñas asociadas a ese usuario",
+                    message = "No se pudieron encontrar reseñas para este usuario",
                     result = ""
                 });
             }
-            List<ResenaDto> resenaDtoLista = new List<ResenaDto>();
-            foreach (Resena res in listaResenas)
-            {
-                resenaDtoLista.Add(ResenaDto.MapToResenaDto(res));
-            }           
-
+            var resenaDtoLista = resenas.Select(ResenaDto.MapToResenaDto).ToList();
             return Ok(new
             {
                 success = true,
@@ -245,34 +169,33 @@ namespace Resenas.Controllers
         [HttpPost]
         [Route("guardarResena")]
         [SwaggerOperation(
-    Summary = "Guardar una nueva reseña",
-    Description = "Guarda una nueva reseña en la base de datos.",
-    OperationId = "GuardarResena"
-)]
+            Summary = "Guardar una nueva reseña",
+            Description = "Guarda una nueva reseña en la base de datos.",
+            OperationId = "GuardarResena"
+        )]
         [SwaggerResponse(200, "Reseña guardada correctamente", typeof(ResenaDto))]
         [SwaggerResponse(400, "Solicitud inválida")]
         [SwaggerRequestExample(typeof(ResenaDto), typeof(ResenaExample))]
-        public async Task<IActionResult> GuardarResena([FromBody] JsonElement optData)
+        public async Task<IActionResult> GuardarResena([FromBody] ResenaRequestDto resenaDto, [FromHeader(Name = "Authorization")] string authorization)
         {
-            User usuario = await VerificarLogueo(optData);
+            var token = authorization.StartsWith("bearer ", StringComparison.OrdinalIgnoreCase) ? authorization.Substring(7) : authorization;
+            var usuario = await VerificarLogueo(token);
             if (usuario == null)
-            {                
+            {
                 return BadRequest(new
                 {
                     success = false,
-                    message = "Error al autenticarse"                    
+                    message = "Error al autenticarse"
                 });
             }
             try
             {
-                Resena resena = MapDataToResena(optData, usuario);
-
-                _resenaRepository.InsertResena(resena);
-
+                var resena = MapDataToResenaDtos(resenaDto, usuario);
+                resena = _resenaRepository.InsertResena(resena);
                 return Ok(new
                 {
                     success = true,
-                    message = "Pudiste insertar bien",
+                    message = "Reseña insertada correctamente",
                     result = ResenaDto.MapToResenaDto(resena)
                 });
             }
@@ -286,12 +209,21 @@ namespace Resenas.Controllers
                 });
             }
         }
- 
+
         [HttpPut]
         [Route("modificarResena")]
-        public async Task<dynamic> modificarResena([FromBody] JsonElement optData) {
-
-            User usuario = await VerificarLogueo(optData);
+        [SwaggerOperation(
+            Summary = "Modificar una reseña",
+            Description = "Modificar una nueva reseña en la base de datos.",
+            OperationId = "modificarResena"
+        )]
+        [SwaggerResponse(200, "Reseña modificada correctamente", typeof(ResenaDto))]
+        [SwaggerResponse(400, "Solicitud inválida")]
+        [SwaggerRequestExample(typeof(ResenaDto), typeof(ResenaExample))]
+        public async Task<IActionResult> ModificarResena([FromBody] ResenaRequestDto resenaDto, [FromHeader(Name = "Authorization")] string authorization)
+        {
+            var token = authorization.StartsWith("bearer ", StringComparison.OrdinalIgnoreCase) ? authorization.Substring(7) : authorization;
+            var usuario = await VerificarLogueo(token);
             if (usuario == null)
             {
                 return BadRequest(new
@@ -302,32 +234,32 @@ namespace Resenas.Controllers
             }
             try
             {
-                //ObjectId idResena = ObjectId.Parse(HttpContext.Request.Query["idResena"]);
-                Resena resena = MapDataToResenaConID(optData, usuario);
+                var resena = MapDataToResenaDtos(resenaDto, usuario);
                 _resenaRepository.ModificarResena(resena);
                 return Ok(new
                 {
                     success = true,
-                    message = "La reseña se modifico correctamente",
+                    message = "Reseña modificada correctamente",
                     result = ResenaDto.MapToResenaDto(resena)
                 });
-            }catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return BadRequest(new
                 {
                     success = false,
-                    message = "Error al insertar la reseña",
+                    message = "Error al modificar la reseña",
                     error = ex.Message
                 });
             }
         }
 
-
         [HttpDelete]
         [Route("eliminarResena")]
-
-        public async Task<dynamic> eliminarResena([FromBody] JsonElement optData)
+        public async Task<IActionResult> EliminarResena([FromQuery] string id, [FromHeader(Name = "Authorization")] string authorization)
         {
-            User usuario = await VerificarLogueo(optData);
+            var token = authorization.StartsWith("bearer ", StringComparison.OrdinalIgnoreCase) ? authorization.Substring(7) : authorization;
+            var usuario = await VerificarLogueo(token);
             if (usuario == null)
             {
                 return BadRequest(new
@@ -338,75 +270,31 @@ namespace Resenas.Controllers
             }
             try
             {
-                Resena resena = new Resena();
-                resena.idMongo = ObjectId.Parse(optData.GetProperty("id").GetString());
-                bool resultado = _resenaRepository.EliminarResena(resena.idMongo);
-                if (resultado == true)
+                var resena = _resenaRepository.GetResenaByID(ObjectId.Parse(id));
+                if (resena == null)
                 {
-                    return Ok(new
-                    {
-                        success = true,
-                        message = "Pudo eliminar la reseña"
-                    });
-                }
-                else
-                {
-                    return BadRequest(new
+                    return NotFound(new
                     {
                         success = false,
-                        message = "Error al eliminar la reseña"
+                        message = "Reseña no encontrada"
                     });
                 }
+                _resenaRepository.EliminarResena(ObjectId.Parse(id));
+                return Ok(new
+                {
+                    success = true,
+                    message = "Reseña eliminada correctamente"
+                });
             }
             catch (Exception ex)
             {
                 return BadRequest(new
                 {
                     success = false,
-                    message = "Error al puntuar la reseña",
+                    message = "Error al eliminar la reseña",
                     error = ex.Message
                 });
             }
         }
-
-
-        [HttpGet]
-        [Route("pruebaAuth")]
-        public async Task<User> pruebaAuth()
-        {
-            string tokenUsuario = HttpContext.Request.Query["id"];
-            //VerificarToken verif = new VerificarToken("http://localhost:3000");
-            return await _verificarToken.obtenerUsuario(tokenUsuario);
-        } 
-
-
-
-
-        public class ResenaExample
-        {
-            public JsonElement GetExamples()
-            {
-                //var example = new
-                //{
-                //    orderID = 1,
-                //    valoration = 5,
-                //    content = "Ejemplo de contenido de reseña."
-                //};
-                //var jsonString = JsonSerializer.Serialize(example);
-                //return JsonSerializer.Deserialize<JsonElement>(jsonString);
-                var example = (new
-                {
-                    success = true,
-                    message = "La reseña se modifico correctamente"
-                });
-                var jsonString = JsonSerializer.Serialize(example);
-                //return jsonString;
-                return JsonSerializer.Deserialize<JsonElement>(jsonString);
-            }
-        }
-
-
     }
-
-
 }

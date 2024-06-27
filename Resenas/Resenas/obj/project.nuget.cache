@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ESll/93q8hSFxC/us6mF3IGo+ypOBfaXC4oWGifDNpczQjDKj90J4A9L5R6CS0lJGlh9FdWh2GY+Qekh7xUz3w==",
+  "dgSpecHash": "BocO7fPpteYNzMzTu+GTDDr9l6AKq1ToYpSp//sO+55J7vFVNqcLHBZwoJ4+k/fxoGN1vxmo0T2QTl47y20zYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\emili\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
+  "projectFilePath": "C:\\Users\\emili\\OneDrive\\Documents\\Proyectos\\Resenas\\Resenas\\Resenas\\Resenas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\emili\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\emili\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
